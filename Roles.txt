@@ -1,0 +1,4 @@
+Elements graphique : Thomas Etcheberry
+Partie reseau : Thomas Etchberry
+Gameplay : Mickael Braga
+Menus : Mickael Braga
