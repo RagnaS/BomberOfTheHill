@@ -11,6 +11,7 @@ public class PlayerScript : MonoBehaviour {
 	private bool right;
 	private string drction;
 	private float vitesse = 4f;
+	[SerializeField]
 	private int teammulti;
 	private GameObject bombe;
 	private bool poser;
@@ -24,6 +25,7 @@ public class PlayerScript : MonoBehaviour {
 	private Animation playerAnimation;
 	[SerializeField]
 	private Transform player;
+	public int score;
 
 	public bool invincible;
 	public bool isMultiplayer;
@@ -108,6 +110,8 @@ public class PlayerScript : MonoBehaviour {
 		playerAnimation = this.transform.GetChild(0).animation;
 		invincible = false;
 		drction = "";
+		score = 0;
+		teammulti =1;
 		
 	}
 	

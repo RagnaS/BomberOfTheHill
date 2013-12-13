@@ -16,7 +16,17 @@ public class Chat : MonoBehaviour {
 		ligneChat[1] = string.Empty;
 		ligneChat[0] = string.Empty;
 	}
-	
+
+	void Update()
+	{
+		if(Input.GetKeyDown(KeyCode.Space) && texteChat.Length!=0)
+		{
+			texteModifie = pseudoJoueur + ": "+ texteChat;
+			networkView.RPC("RafraichirChat", RPCMode.All, texteModifie);
+			texteChat = string.Empty;
+		}
+
+	}
 	void OnGUI()
 	{	
 		//Si on est client ou serveur on pourra afficher le chat

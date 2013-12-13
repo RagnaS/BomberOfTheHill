@@ -1,0 +1,20 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\PlayerScript.cs">
+    <Files>
+      <File FileName="Assets\Scripts\GenerateArena.cs" Line="49" Column="6" />
+      <File FileName="Assets\Scripts\TerritoireScript.cs" Line="66" Column="4" />
+      <File FileName="Assets\Scripts\PlayerScript.cs" Line="114" Column="16" />
+      <File FileName="Assets\Scripts\PlayerScriptMulti.cs" Line="121" Column="13" />
+      <File FileName="Assets\Scripts\Bombes.cs" Line="61" Column="32" />
+      <File FileName="Assets\Scripts\GameManagerScript.cs" Line="26" Column="25" />
+      <File FileName="Assets\Scripts\Connexion.cs" Line="69" Column="14" />
+      <File FileName="Assets\Scripts\Score.cs" Line="23" Column="22" />
+      <File FileName="Assets\Scripts\Chat.cs" Line="16" Column="21" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

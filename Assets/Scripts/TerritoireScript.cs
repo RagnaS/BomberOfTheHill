@@ -63,7 +63,7 @@ public class TerritoireScript : MonoBehaviour {
 		Timer -= Time.deltaTime;
 		if (Timer <= 0)
 		{
-			capturedteam = player.GetComponent<PlayerScript>().Teammulti;
+			player.GetComponent<PlayerScript>().score += 1;
 			light.light.color = Color.green;
 			Timer = 2.0f;
 			booltimer = false;

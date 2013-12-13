@@ -10,6 +10,7 @@ public class Bombes : MonoBehaviour {
     private Ray ray;
 	public GameObject particules;
 	public bool isMultiplayer;
+	AudioSource audioSource;
 
     public GameObject Bombe
     {
@@ -40,9 +41,6 @@ public class Bombes : MonoBehaviour {
                 Explosion();
             }
         }
-        
-	
-
        
 	}
 
@@ -52,14 +50,14 @@ public class Bombes : MonoBehaviour {
 		if(!isMultiplayer)
 		{
 			Instantiate(particules, gameObject.transform.position, particules.transform.rotation);
-        	ApplyRaycast();
+        	//ApplyRaycast();
 			animation.Play("Explosion");
 			Destroy(this.gameObject);
 		}
 		else
 		{
 			Network.Instantiate(particules, gameObject.transform.position, particules.transform.rotation,0);
-			ApplyRaycast();
+			//ApplyRaycast();
 			animation.Play("Explosion");
 			Network.Destroy(this.gameObject);
 		}
@@ -88,7 +86,7 @@ public class Bombes : MonoBehaviour {
 
         if (Physics.Raycast( ray, out hit, 3f))
         {
-			if (hit.collider.gameObject.CompareTag("Player") || hit.collider.gameObject.name == "Cube_destructibleFire(Clone)" || hit.collider.gameObject.name == "Cube_destructibleGlace(Clone)" || hit.collider.gameObject.name == "Cube_destructibleNature(Clone)" || hit.collider.gameObject.name == "Cube_destructibleNormal(Clone)" || hit.collider.gameObject.name == "Cube_destructibleSpace(Clone)"  )
+			/*if (hit.collider.gameObject.CompareTag("Player") || hit.collider.gameObject.name == "Cube_destructibleFire(Clone)" || hit.collider.gameObject.name == "Cube_destructibleGlace(Clone)" || hit.collider.gameObject.name == "Cube_destructibleNature(Clone)" || hit.collider.gameObject.name == "Cube_destructibleNormal(Clone)" || hit.collider.gameObject.name == "Cube_destructibleSpace(Clone)"  )
             {
 
 
@@ -107,7 +105,7 @@ public class Bombes : MonoBehaviour {
 						Network.Destroy(hit.collider.gameObject);
 				}
 
-            }
+            }*/
 
         }
      

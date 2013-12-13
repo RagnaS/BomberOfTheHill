@@ -11,7 +11,7 @@ public class PlayerScriptMulti : MonoBehaviour {
 	private bool right;
 	private string drction;
 	private float vitesse = 4f;
-	private int teammulti;
+	public int teammulti;
 	private GameObject bombe;
 	private bool poser;
 	private Ray ray;
@@ -25,6 +25,7 @@ public class PlayerScriptMulti : MonoBehaviour {
 	[SerializeField]
 	private Transform player;
 	public GameObject bomba;
+	public int score;
 	
 	public bool invincible;
 	public bool isMultiplayer;
@@ -33,12 +34,7 @@ public class PlayerScriptMulti : MonoBehaviour {
 	
 	
 	#region getter/setter
-	
-	public int Teammulti
-	{
-		get { return teammulti; }
-		set { teammulti = value; }
-	}
+
 	public bool Poser
 	{
 		get { return poser; }
@@ -122,6 +118,7 @@ public class PlayerScriptMulti : MonoBehaviour {
 		playerAnimation = this.transform.GetChild(0).animation;
 		invincible = false;
 		drction = "";
+		score = 0;
 		
 	}
 	

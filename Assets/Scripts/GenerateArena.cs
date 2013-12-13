@@ -4,6 +4,7 @@ using System.Collections;
 
 public class GenerateArena : MonoBehaviour {
 
+
 	public int size; //1 = très petite, 2 = petite , 3 = moyenne, 4 = grande
 	public int sizeMap; // Taille effective de la map dans la scene
 	public string typeMap; //"normal", "fire", "ice", "nature"
@@ -34,12 +35,24 @@ public class GenerateArena : MonoBehaviour {
     public bool isTerritory; // Si la partie est en mode conquete de territoire
     public bool territoryExist=false;
     private float timerZone;
+	private int typeParty;
 
 	[RPC]
 	void Start(){
-
+		/*if(isMultiplayer)
+		{
+			destructibleNormalCube.GetComponent<NetworkView>().enabled = true;
+			destructibleFireCube.GetComponent<NetworkView>().enabled = true;
+			destructibleIceCube.GetComponent<NetworkView>().enabled = true;
+			destructibleNatureCube.GetComponent<NetworkView>().enabled = true;
+			destructibleSpaceCube.GetComponent<NetworkView>().enabled = true;
+		}*/
+		typeParty = PlayerPrefs.GetInt("Type");
 		typeMap = PlayerPrefs.GetString("Level");
-
+		if(typeParty == 2)
+			isTerritory = true;
+		else 
+			isTerritory = false;
 		switch(typeMap)
 		{
 		case "normal":
@@ -141,31 +154,21 @@ public class GenerateArena : MonoBehaviour {
     {
         if (isTerritory)
         {
-            if (!isMultiplayer)
+            if (!isMultiplayer && territoryExist == false)
             {
-                if (!territoryExist)
-                {
-                    Instantiate(territory, new Vector3(Random.Range(-sizeMap / 2, sizeMap / 2), 0, Random.Range(-sizeMap / 2, sizeMap / 2)), territory.transform.rotation);
-                    timerZone = 0;
-                }
-                else
-                {
-                    if (timerZone < 20)
-                    {
-                        timerZone += Time.deltaTime;
-                    }
-                    else
-                    {
-                        Destroy(territory);
-                        territoryExist = false;
-                    }
-                }
+                
+				for(int i = 0;i<5;i++)
+				{
+					Instantiate(territory, new Vector3(Random.Range(-sizeMap / 2, sizeMap / 2), 0, Random.Range(-sizeMap / 2, sizeMap / 2)), territory.transform.rotation);
+				}
+				territoryExist = true;
             }
             else
             {
                 if (!territoryExist)
                 {
                     Network.Instantiate(territory, new Vector3(Random.Range(-sizeMap / 2, sizeMap / 2), 0, Random.Range(-sizeMap / 2, sizeMap / 2)), territory.transform.rotation,0);
+					territoryExist = true;
                     timerZone = 0;
                 }
                 else
@@ -183,4 +186,9 @@ public class GenerateArena : MonoBehaviour {
             }
         }
     }
+
+	void DestroyTerritory()
+	{
+		Destroy (territory);
+	}
 }

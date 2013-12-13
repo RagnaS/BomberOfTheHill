@@ -6,8 +6,8 @@ using System.Collections;
 
 public class GameManagerScript : MonoBehaviour
 {
-
-
+	
+	
 	public GameObject[] Player;
 	public GameObject[] Territoires;
 	public int[] score;
@@ -22,6 +22,8 @@ public class GameManagerScript : MonoBehaviour
 	public GameObject modelPlayer;
 	public GameObject modelEnnemy;
 	public GenerateArena arena;
+	public AudioSource audioSource;
+	private string typeMap;
 	void Awake()
 	{
 		
@@ -37,6 +39,7 @@ public class GameManagerScript : MonoBehaviour
 		score = new int[nbteam];
 		Territoires = GameObject.FindGameObjectsWithTag("Territoire");
 		Player = new GameObject[nbjoueurs];
+		
 		if (PlayerPrefs.GetInt("Type") == 1)
 		{
 			typePartie = "normal";
@@ -45,30 +48,69 @@ public class GameManagerScript : MonoBehaviour
 		{
 			typePartie = "territoire";
 		}
-
-			CreationJoueur();
-
+		
+		CreationJoueur();
+		typeMap = PlayerPrefs.GetString("Level");
+		
+		switch(typeMap)
+		{
+		case "normal":
+			audioSource = gameObject.AddComponent<AudioSource>();
+			audioSource.clip = Resources.Load("industryMusic") as AudioClip;
+			audioSource.Play();
+			break;
+		case "fire":
+			audioSource = gameObject.AddComponent<AudioSource>();
+			audioSource.clip = Resources.Load("fireMusic") as AudioClip;
+			audioSource.Play();
+			break;
+		case "nature":
+			audioSource = gameObject.AddComponent<AudioSource>();
+			audioSource.clip = Resources.Load("Nature") as AudioClip;
+			audioSource.Play();
+			break;
+		case "ice":
+			audioSource = gameObject.AddComponent<AudioSource>();
+			audioSource.clip = Resources.Load("iceMusic") as AudioClip;
+			audioSource.Play();
+			break;
+		case "space":
+			audioSource = gameObject.AddComponent<AudioSource>();
+			audioSource.clip = Resources.Load("spaceMusic") as AudioClip;
+			audioSource.Play();
+			break;
+		}
 	}
-
+	
 	
 	[RPC]
 	void Update()
 	{
+		
+		Player = GameObject.FindGameObjectsWithTag("Player");
+		CheckGameState();
+		
+		if(gameFinished)
+		{
+			Application.LoadLevel(10);
+		}
+		
+		
+	}
+	
+	void CheckGameState()
+	{
+		
 		if (typePartie == "normal")
 		{
-			if (nbjoueurs < 2)
+			if (Player.Length < 2)
 				gameFinished = true;
 		}
 		else
 		{
 			Checkscore();
 		}
-
-		if(gameFinished)
-		{
-			Application.LoadLevel(8);
-		}
-
+		
 		
 	}
 	
@@ -77,7 +119,7 @@ public class GameManagerScript : MonoBehaviour
 	{
 		nbjoueurs -= 1;
 	}
-
+	
 	
 	[RPC]
 	void CreationJoueur()
@@ -99,25 +141,24 @@ public class GameManagerScript : MonoBehaviour
 	[RPC]
 	void Checkscore()
 	{
-
-
+		
+		
 		for(int i = 0; i < score.Length; i++)
 		{
 			score[i] = 0;
 		}
-
+		
 		foreach( GameObject territ in Territoires)
 		{
 			team = territ.transform.GetChild(0).GetComponent<TerritoireScript>().Capturedteam;
-			score[team]++;
+			score[team] += 1;
 		}
-
+		
 		for(int j = 0; j < score.Length; j++)
 		{
 			if(score[j] > Territoires.Length /2)
 			{
-
-				Application.LoadLevel(8);
+				Application.LoadLevel(10);
 			}
 		}
 	}

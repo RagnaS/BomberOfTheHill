@@ -122,16 +122,15 @@ public class Connexion : MonoBehaviour {
 		}
 		
 		//Bouton d'initialisation du serveur
-		if(GUI.Button(new Rect(10,160,150,30),"Start a server") && pseudo.Length != 0)
+		/*if(GUI.Button(new Rect(10,160,150,30),"Start a server") && pseudo.Length != 0)
 		{
 			bool useNat = !Network.HavePublicAddress();
 			Network.InitializeServer(maxClients, connectPort, useNat);
 			Debug.Log("Port: "+connectPort);
 			arena.SendMessage("Generate");
-			/******chargement du niveau*****/
 			//Application.LoadLevel("Jeu");
 
-		}
+		}*/
 	}
 	
 	void Client_GUI(){
@@ -150,7 +149,7 @@ public class Connexion : MonoBehaviour {
 	void OnServerInitialized()
 	{
 		Debug.Log("Serveur créer");
-		chat.SendMessage("Connected",pseudo);
+		chat.SendMessage("Connected","Serveur");
 	}
 	
 	void OnFailedToConnect()
